@@ -2,6 +2,7 @@ library(ggplot2)
 library(gggenes)
 
 data <- read.csv("mydata.csv")
+data2 <- read.csv("mydata2.csv")
 
 ggplot(data, aes(xmin = start, xmax = end, y = molecule, fill = gene)) +
   geom_gene_arrow() +
@@ -65,7 +66,7 @@ ggplot(data, aes(xmin = start, xmax = end, y = molecule, fill = gene,
 ggplot(data, aes(xmin = start, xmax = end, y = molecule)) +
   facet_wrap(~ molecule, scales = "free", ncol = 1) +
   geom_gene_arrow(fill = "white") +
-  geom_subgene_arrow(data = example_subgenes,
+  geom_subgene_arrow(data = data2,
     aes(xmin = start, xmax = end, y = molecule, fill = gene,
         xsubmin = from, xsubmax = to), color="black", alpha=.7) +
   theme_genes()
@@ -79,14 +80,16 @@ ggplot(subset(data, molecule == "Genome4" & gene == "genA"),
   geom_gene_arrow() +
   geom_gene_label(aes(label = gene)) +
   geom_subgene_arrow(
-    data = subset(example_subgenes, molecule == "Genome4" & gene == "genA"),
+    data = subset(data2, molecule == "Genome4" & gene == "genA"),
     aes(xsubmin = from, xsubmax = to, fill = subgene)
   ) +
   geom_subgene_label(
-    data = subset(example_subgenes, molecule == "Genome4" & gene == "genA"),
+    data = subset(data2, molecule == "Genome4" & gene == "genA"),
     aes(xsubmin = from, xsubmax = to, label = subgene),
     min.size = 0
   )
+
+
 
 
 
